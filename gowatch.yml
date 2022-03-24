@@ -1,0 +1,18 @@
+daemons:
+  -
+    name: "demo程序"
+    program: "./panic -c local.yml"
+    retry: 1
+
+  - name: "demo程序2"
+    program: "/Users/jodu/projects/wolltec/gowatch/panic -c local.yml"
+    retry: -1
+
+dingalert:
+  flag: "# "
+  # 告警群
+#  token: "998e143de293624e08bc998ae4e94b3e0f918ca00e701042d1f196b57ea3fcc4"
+  # 测试群
+  token: "3cda16c10becc0a2b7affac09bf5e9eebe12f22997a829390d905c2de95a7356"
+  mobiles:
+    - "18064035445"
