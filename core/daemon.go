@@ -62,8 +62,9 @@ func (p DaemonConfig) daemon(wg *sync.WaitGroup)  {
 		notice := listen(program, args...)
 		log.Printf("【异常】%s | 捕获到程序异常退出\n------------------ 异常信息 ------------------\n%s\n--------------------------------------------\n", p.Name, notice)
 		//发送告警
-		//DingAlert.SendPanic(notice)
-		log.Printf("【告警】%s | 已推送异常告警\n", p.Name)
+		if DingAlert.SendPanic(notice) == nil{
+			log.Printf("【告警】%s | 已推送异常告警\n", p.Name)
+		}
 		p.Retry-- //重试计数
 		retry++
 		restart = "重试"

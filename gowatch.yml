@@ -4,9 +4,6 @@ daemons:
     program: "./panic -c local.yml"
     retry: 1
 
-  - name: "demo程序2"
-    program: "/Users/jodu/projects/wolltec/gowatch/panic -c local.yml"
-    retry: -1
 
 dingalert:
   flag: "# "
