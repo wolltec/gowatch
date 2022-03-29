@@ -4,12 +4,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"flag"
 	"fmt"
-	cfg "git.addnewer.com/middleware/rmlibs/config"
 	"io/ioutil"
 	"net/http"
-	"strings"
 	"time"
 )
 
@@ -17,7 +14,7 @@ var host = "https://oapi.dingtalk.com/robot/send?access_token="
 var Token string
 var AtMobiles []string
 
-var DingAlert = initDingAlert()
+var DingAlert *dingAlert
 
 type dingAlert struct {
 	env            string
@@ -41,22 +38,8 @@ type dingResponse struct {
 	Errmsg  string `json:"errmsg,omitempty"`
 }
 
-func initDingAlert() *dingAlert {
-	var confPath string
-	flag.StringVar(&confPath, "c", "gowatch.yml", "specify the config path")
-	flag.Parse()
-	confPath = strings.TrimSuffix(confPath, ".yml")
-	startIndex := strings.Index(confPath, "config")
-	if startIndex == -1 || startIndex + 7 >= len(confPath) {
-		startIndex = 0
-	}
-	env := confPath[startIndex:]
-	return &dingAlert{
-		env:            env,
-		flag:           cfg.GetString("dingalert.flag"),
-		token:          cfg.GetString("dingalert.token"),
-		defaultMobiles: cfg.GetStringSlice("dingalert.mobiles"),
-	}
+func initDingAlert(conf *dingAlert)  {
+	DingAlert = conf
 }
 func (l *dingAlert) Send(title string, content string, mobiles ...string) error {
 	if content == "" {

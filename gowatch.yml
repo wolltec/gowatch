@@ -1,6 +1,6 @@
 daemons:
   -
-    name: "demo程序"
+    name: "GoWatch"
     program: "./panic -c local.yml"
     retry: 1
 
