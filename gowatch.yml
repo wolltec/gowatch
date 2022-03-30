@@ -1,15 +1,19 @@
 daemons:
-  -
+  - # 被守护程序名称
     name: "GoWatch"
+    # 被守护程序的启动命令
     program: "./panic -c local.yml"
-    retry: 1
-
+    # 守护期间最大重启次数，小于0代表无限次重启
+    max_retry: -1
+  #	当程序意外中断，守护服务会尝试重新启动程序，每秒最多执行一次重启
 
 dingalert:
+  #告警标记，取自钉钉机器人
   flag: "# "
-  # 告警群
-#  token: "998e143de293624e08bc998ae4e94b3e0f918ca00e701042d1f196b57ea3fcc4"
-  # 测试群
+  # 告警群 TOKEN
+  #  token: "998e143de293624e08bc998ae4e94b3e0f918ca00e701042d1f196b57ea3fcc4"
+  # 测试群 TOKEN
   token: "3cda16c10becc0a2b7affac09bf5e9eebe12f22997a829390d905c2de95a7356"
+  # 需要重点@同学的钉钉手机号，批量
   mobiles:
     - "18064035445"

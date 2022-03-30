@@ -38,7 +38,7 @@ type dingResponse struct {
 	Errmsg  string `json:"errmsg,omitempty"`
 }
 
-func initDingAlert(conf *dingAlert)  {
+func initDingAlert(conf *dingAlert) {
 	DingAlert = conf
 }
 func (l *dingAlert) Send(title string, content string, mobiles ...string) error {
@@ -66,9 +66,9 @@ func (l *dingAlert) Send(title string, content string, mobiles ...string) error 
 	}
 	return nil
 }
-func (l *dingAlert) SendPanic(content string, mobiles ...string) error {
-	now := "时间："+time.Now().Format("2006-02-01 15:04:05")+"\n详细信息：\n"
-	return l.Send("进程中断 | 重要", now+content, mobiles...)
+func (l *dingAlert) SendPanic(name string, content string, mobiles ...string) error {
+	now := "时间：" + time.Now().Format("2006-02-01 15:04:05") + "\n详细信息：\n"
+	return l.Send(name+" | 进程中断 | 重要", now+content, mobiles...)
 }
 func post(url string, data interface{}) (*dingResponse, error) {
 	jsonData, _ := json.Marshal(data)
@@ -87,7 +87,7 @@ func post(url string, data interface{}) (*dingResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	if result.Errcode !=0 {
+	if result.Errcode != 0 {
 		fmt.Println("Error", result)
 	}
 	return result, nil
