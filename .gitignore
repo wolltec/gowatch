@@ -3,4 +3,4 @@ go.sum
 panic
 local.yml
 
-gowatch*
+./gowatch*
