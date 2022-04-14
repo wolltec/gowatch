@@ -136,6 +136,9 @@ func listen(info string, program string, args ...string) (notice string) {
 	//daemon.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
 	var stderr bytes.Buffer //捕捉标准错误
 	daemon.Stderr = &stderr
+	output, _ := os.Create(config.GetString("logs.output"))
+	daemon.Stdout = output
+	defer output.Close()
 	go func() {
 		for true {
 			time.Sleep(time.Millisecond * 500)

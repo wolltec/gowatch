@@ -17,3 +17,6 @@ dingalert:
   # 需要重点@同学的钉钉手机号，批量
   mobiles:
     - "18064035445"
+
+logs:
+  output: "./output.log"
